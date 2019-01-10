@@ -87,4 +87,7 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+### db.properties ###
+db.properties
+
 # End of https://www.gitignore.io/api/maven,eclipse,java-web
