@@ -53,7 +53,9 @@ public class FtpUtil {
 					if (null == dir || "".equals(dir)) continue;
 					tempPath += "/" + dir;
 					if (!ftp.changeWorkingDirectory(tempPath)) {
+						System.out.println(tempPath);
 						if (!ftp.makeDirectory(tempPath)) {
+							System.out.println("!ftp.makeDirectory(tempPath)");
 							return result;
 						} else {
 							ftp.changeWorkingDirectory(tempPath);
