@@ -35,7 +35,6 @@ public class ItemParamServiceImpl implements ItemParamService {
 		Date date = new Date();
 		itemParam.setCreated(date);
 		itemParam.setUpdated(date);
-		System.out.println("itemParamMapper.insert(itemParam)"+itemParamMapper.insert(itemParam));
 		return TaotaoResult.ok();
 	}
 }

@@ -16,4 +16,6 @@ public interface JedisClient {
 
 	long ttl(String key);
 
+	Long hdel(String iNDEX_CONTENT_REDIS_KEY, String string);
+
 }
