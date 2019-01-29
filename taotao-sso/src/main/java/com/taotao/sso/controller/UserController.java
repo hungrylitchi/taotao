@@ -1,5 +1,8 @@
 package com.taotao.sso.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -21,22 +24,22 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-
-	//显示注册页面
+	// 显示注册页面
 	@RequestMapping("/showRegister")
 	public String showRegister() {
 		return "register";
 	}
-	//显示登录页面
+
+	// 显示登录页面
 	@RequestMapping("/showLogin")
-	public String showLogin(String redirect,Model model) {
-		//将用户在登陆之前想要访问的页面记录下来
-		//用户登录成功后将会重定向到redirect请求页面
+	public String showLogin(String redirect, Model model) {
+		// 将用户在登陆之前想要访问的页面记录下来
+		// 用户登录成功后将会重定向到redirect请求页面
 		model.addAttribute("redirect", redirect);
 		return "login";
 	}
-	
-	//注册前需要进行数据校验检查用户名或手机号是否重复
+
+	// 注册前需要进行数据校验检查用户名或手机号是否重复
 	@RequestMapping("/check/{param}/{type}")
 	@ResponseBody
 	public Object checkData(@PathVariable String param, @PathVariable Integer type, String callback) {
@@ -97,10 +100,10 @@ public class UserController {
 	// 用户登录
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public TaotaoResult userLogin(String username, String password) {
+	public TaotaoResult userLogin(String username, String password, HttpServletRequest request,
+			HttpServletResponse response) {
 		try {
-
-			TaotaoResult result = userService.userLogin(username, password);
+			TaotaoResult result = userService.userLogin(request, response, username, password);
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -108,7 +111,7 @@ public class UserController {
 		}
 	}
 
-	//通过token查询在redis缓存中的用户，查询不到时即为已经登出
+	// 通过token查询在redis缓存中的用户，查询不到时即为已经登出
 	@RequestMapping("/token/{token}")
 	@ResponseBody
 	public Object getUserByToken(@PathVariable String token, String callback) {
@@ -130,6 +133,5 @@ public class UserController {
 		}
 
 	}
-
 
 }
