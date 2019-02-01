@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="redisClient" class="redis.clients.jedis.JedisCluster">
+		<constructor-arg name="nodes">
+			<set>
+				<bean class="redis.clients.jedis.HostAndPort">
+					<constructor-arg name="host" value="${REDIS_01_HOST}"></constructor-arg>
+					<constructor-arg name="port" value="${REDIS_01_PORT}"></constructor-arg>
+				</bean>
+				<bean class="redis.clients.jedis.HostAndPort">
+					<constructor-arg name="host" value="${REDIS_02_HOST}"></constructor-arg>
+					<constructor-arg name="port" value="${REDIS_02_PORT}"></constructor-arg>
+				</bean>
+				<bean class="redis.clients.jedis.HostAndPort">
+					<constructor-arg name="host" value="${REDIS_03_HOST}"></constructor-arg>
+					<constructor-arg name="port" value="${REDIS_03_PORT}"></constructor-arg>
+				</bean>
+				<bean class="redis.clients.jedis.HostAndPort">
+					<constructor-arg name="host" value="${REDIS_04_HOST}"></constructor-arg>
+					<constructor-arg name="port" value="${REDIS_04_PORT}"></constructor-arg>
+				</bean>
+				<bean class="redis.clients.jedis.HostAndPort">
+					<constructor-arg name="host" value="${REDIS_05_HOST}"></constructor-arg>
+					<constructor-arg name="port" value="${REDIS_05_PORT}"></constructor-arg>
+				</bean>
+				<bean class="redis.clients.jedis.HostAndPort">
+					<constructor-arg name="host" value="${REDIS_06_HOST}"></constructor-arg>
+					<constructor-arg name="port" value="${REDIS_06_PORT}"></constructor-arg>
+				</bean>
+			</set>
+		</constructor-arg>
+	</bean>
+	
+	<bean class="com.taotao.order.pojo.impl.JedisClientCluster"/>
+</beans>
